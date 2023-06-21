@@ -29,3 +29,14 @@ export const addProduct = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+export const getProductDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.find({ _id: id });
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(400).json({ message: "Product not found" });
+  }
+};
